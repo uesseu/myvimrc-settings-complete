@@ -1,0 +1,49 @@
+########################################
+# Interfaces
+# -------------------------------------
+# Interfaces for ddc.
+########################################
+
+[[plugins]]
+# UI for ddc.
+lazy = true
+on_event = 'VimEnter'
+repo = 'Shougo/ddc-ui-native'
+hook_add = '''
+let g:ddc_sources = []
+let g:ddc_source_options = #{_: #{}}
+let g:ddc_source_params = #{}
+let g:lsp_settings_filetype_typescript = ['deno']
+'''
+
+[[plugins]]
+# Ddc around source.
+lazy = true
+on_event = 'VimEnter'
+repo = 'Shougo/ddc-source-around'
+hook_add = ''' 
+call extend(g:ddc_source_params,#{around: #{ maxSize: 50 }})
+'''
+
+[[plugins]]
+# File source for ddc.
+lazy = true
+on_event = 'VimEnter'
+repo = 'LumaKernel/ddc-file'
+
+[[plugins]]
+# Ddc converter to remove overlap.
+lazy = true
+on_event = 'VimEnter'
+repo = 'Shougo/ddc-converter_remove_overlap'
+
+[[plugins]]
+# Fuzzy ui for ddc.
+lazy = true
+on_event = 'VimEnter'
+repo = 'tani/ddc-fuzzy'
+hook_add = '''
+call extend(g:ddc_source_options,
+    \ #{_: #{ matchers: ["matcher_fuzzy"], sorters: ["sorter_fuzzy"], converters: ["converter_fuzzy"],
+    \         minAutoCompleteLength: 1}})
+'''
